@@ -22,7 +22,7 @@
 					request.getParameter("approve"),
 					agree};
 %>
-
+ 
 <table border=1>
 	<%
 	for(int i=0; i<6; i++){

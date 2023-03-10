@@ -14,7 +14,7 @@
     
     <table border=1>
     <%
-    out.print("<tr>");
+    out.print("<tr>"); //<tr bgcolor='#ddaadd'> 바로 스타일 적용
     for(int i=2; i<=9; i++){
     	out.print("<th>" + i +"단</th>");
     }
@@ -23,13 +23,28 @@
     for(int i=1; i<=9; i++){
     	out.print("<tr>");
     	for(int j=2; j<=9; j++){
-    		
     		out.print("<td>" + j +" * "+ i + " = " + j*i +"</td>");
-
     	}
     	out.print("</tr>");
     }
+    %>
+    </table>
     
+    
+    <%
+    for(int i=1; i<=9; i++){
+    %>
+    	<tr>
+    	<%
+    	for(int j=2; j<=9; j++){
+    	%>
+    		<td><%=j+"*"+i+"="+j*i%></td>
+    	<%
+    	}
+    	%>
+    	
+    	</tr>
+    <%
+    }
     %>
     
-    </table>

@@ -39,7 +39,7 @@
 Ex04_form.jsp<br>
 
 
-<form name="myform" action="Ex04_result.jsp" method="post">
+<form name="myform" action="Ex04_result2.jsp" method="post">
 	이름 : <input type="text" name="name" value="정국"><br>
 	비번 : <input type="text" name="pw" value="1234"><br>
 	과일선택 : <br>

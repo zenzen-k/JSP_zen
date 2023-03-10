@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -11,8 +12,8 @@
 	}
 	//동의여부
 	String agree = "";
-	if(request.getParameter("agree").equals("on"))
-		agree = "동의함";
+	/* if(request.getParameter("agree").equals("on"))
+		agree = "동의함"; */
 	
 	String[] arr = {"id","pw","product","time","approve","agree"};
 	String[] arr2 = {request.getParameter("id"),
@@ -32,4 +33,58 @@
 		out.print("</tr>");
 	}
 	%>
+</table>
+
+
+
+<br><br>
+
+
+
+<table border=1>
+<%
+	Enumeration<String> enu =  request.getParameterNames();
+	
+	while(enu.hasMoreElements()){
+		String elem = enu.nextElement();
+		String[] value = request.getParameterValues(elem);
+
+%>
+		<tr>
+			<%
+			if(!(elem.equals("agree"))){
+				for(String v : value){
+					out.print("<td>" + elem + "</td>");
+					out.print("<td>" + v + "</td>");
+				}
+			}
+			else{
+				String[] values = request.getParameterValues("agree");
+				out.print("<td>agree</td>");
+				for(int i=0; i<values.length; i++){
+					if(values[i] == null){
+						out.print("동의안함");
+					}else{
+						out.print("동의함");
+					}
+				}
+			}
+				
+				// checkbox는 선택하지 않으면 이름조차 가져올 수 없다
+				/* if(elem.equals("agree")){
+					for(int i=0; i<value.length; i++){
+						if(value[i] == null){
+							out.print("동의안함");
+						}else{
+							out.print("동의함");
+						}
+					}
+				} */
+				
+			%>
+		</tr>
+<%
+		
+	}
+%>
 </table>

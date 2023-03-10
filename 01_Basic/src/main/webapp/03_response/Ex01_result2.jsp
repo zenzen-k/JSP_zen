@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-Ex01_result2.jsp<br>
+Ex01_result1.jsp -> Ex01_result2.jsp<br>
 
 <%
 String msg = request.getParameter("msg");

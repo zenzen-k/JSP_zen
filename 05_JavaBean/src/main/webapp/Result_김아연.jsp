@@ -31,7 +31,9 @@
 	bb.setPw(pw);
 	bb.setName(name);
 	bb.setMclass(className);
-	bb.setPhone1(phone1 + " - " + phone2 + " - " + phone3);
+	bb.setPhone1(phone1);
+	bb.setPhone2(phone2);
+	bb.setPhone3(phone3);
 %>
 <!--  1. 자바코드 - getter 출력 -->
 <h3>당신이 입력한 정보입니다.</h3>
@@ -40,7 +42,9 @@
 비번1 : <%=bb.getPw() %><br>
 이름1 : <%=bb.getName() %><br>
 회원구분1 : <%=bb.getMclass() %><br>
-전화번호1 : <%=bb.getPhone1() %><br><br>
+전화번호1 : <%=bb.getPhone1() %> - 
+			<%=bb.getPhone2() %> - 
+			<%=bb.getPhone3() %>
 
 <hr>
 <!-- 2. jsp코드 - 객체생성 및 setProperty -->

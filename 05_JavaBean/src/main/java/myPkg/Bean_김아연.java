@@ -9,8 +9,6 @@ public class Bean_김아연 {
 	private String phone2;
 	private String phone3;
 	
-	
-
 	public String getId() {
 		return id;
 	}
@@ -53,6 +51,5 @@ public class Bean_김아연 {
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
 	}
-	
 	
 }

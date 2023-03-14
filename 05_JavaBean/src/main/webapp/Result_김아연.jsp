@@ -15,6 +15,7 @@
 	
 	String className = "";
 	if(mclass.equals("1")){
+		//또는 여기서 out.print(bb.setPw(pw))처럼 바로해도 ㄱㅊ
 		className = "비회원";
 	}else if(mclass.equals("2")){
 		className = "정회원";
@@ -27,7 +28,7 @@
 	/* 1. 자바코드 - 객체 생성 및 setter*/
 	Bean_김아연 bb = new Bean_김아연();
 	
-	bb.setId(id);
+	bb.setId(request.getParameter("id"));
 	bb.setPw(pw);
 	bb.setName(name);
 	bb.setMclass(className);
@@ -35,7 +36,7 @@
 	bb.setPhone2(phone2);
 	bb.setPhone3(phone3);
 %>
-<!--  1. 자바코드 - getter 출력 -->
+<!--  1. 자바코드 - getter 출력 또는 out객체이용해도 ㄱㅊ -->
 <h3>당신이 입력한 정보입니다.</h3>
 <hr>
 아이디1 : <%=bb.getId() %><br>
@@ -49,6 +50,8 @@
 <hr>
 <!-- 2. jsp코드 - 객체생성 및 setProperty -->
 <jsp:useBean id="bb2" class="myPkg.Bean_김아연"/>
+
+<%-- 
 <jsp:setProperty property="id" name="bb2"/>
 <jsp:setProperty property="pw" name="bb2"/>
 <jsp:setProperty property="name" name="bb2"/>
@@ -56,6 +59,9 @@
 <jsp:setProperty property="phone1" name="bb2" param="phone1"/>
 <jsp:setProperty property="phone2" name="bb2" param="phone2"/>
 <jsp:setProperty property="phone3" name="bb2" param="phone3"/>
+ --%>
+
+<jsp:setProperty property="*" name="bb2"/>
 
 <!-- 2. jsp코드 - getProperty 출력 -->
 아이디2 : <jsp:getProperty property="id" name="bb2"/><br>
@@ -65,3 +71,25 @@
 전화번호2 : <jsp:getProperty property="phone1" name="bb2"/> - 
 			<jsp:getProperty property="phone2" name="bb2"/> - 
 			<jsp:getProperty property="phone3" name="bb2"/>
+
+<br>
+<jsp:setProperty property="mclass" name="bb2"/>
+회원구분2 : 
+<%
+	// 1 2 3 4
+	String m = bb2.getMclass();
+	switch(m){
+	case "1" :
+		out.println("비회원 <br>");
+		break;
+	case "2" :
+		out.println("정회원 <br>");
+		break;
+	case "3" :
+		out.println("우수회원 <br>");
+		break;
+	case "4" :
+		out.println("관리자 <br>");
+		break;
+	}
+%>

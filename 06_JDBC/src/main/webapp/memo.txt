@@ -1,0 +1,24 @@
+JDBC 프로그래밍 단계
+0. jar 화일 추가 : C:\Oracle\product\12.2.0\dbhome_1\jdbc\lib\ojdbc8.jar
+	// 오라클 12버전에서 8임
+1. 드라이버 로드 : Class.forName()
+2. 계정 접속(DB연결) : DriverManager.getConnection()
+3. SQL문 분석 : prepareStatement()
+4. SQL문 실행 : select -> excuteQuery(), insert,update,delete -> excuteUpdate()
+5. 접속 종료 : close
+
+
+
+drop table member cascade constraints;
+
+create table member(
+	id varchar2(10) primary key,
+	passwd varchar2(10) not null,
+	name varchar2(10) not null,
+	reg_date date default sysdate
+);
+
+insert into member values('kim','1234','김연아','2000-3-3');
+insert into member values('son','7777','손흥민','2023-10-20');
+
+commit;

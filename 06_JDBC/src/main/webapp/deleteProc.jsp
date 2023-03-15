@@ -33,7 +33,7 @@ deleteProc.jsp<br>
 		if(rs.next()){
 			String pw = rs.getString("passwd");
 			if(pw.equals(passwd)){
-				sql = " delete member where id=?";
+				sql = "delete member where id=?";
 				ps = conn.prepareStatement(sql);
 				
 				ps.setString(1, id);
@@ -41,6 +41,11 @@ deleteProc.jsp<br>
 				int cnt = ps.executeUpdate();
 				System.out.println("삭제 성공 : " + cnt);
 				out.println("삭제 성공했습니다.");
+				%>
+				<script type="text/javascript">
+					alert("삭제 성공");
+				</script>
+				<%
 			}
 			else{
 				out.println("비밀번호가 잘못되었습니다.");
@@ -56,7 +61,7 @@ deleteProc.jsp<br>
 		System.out.println("접속 실패");
 	} finally{
 		// 5. 접속끊기
-		conn.close();
-		System.out.println("계정 접속 종료");
+		if(conn==null)
+			conn.close();
 	}
 %>

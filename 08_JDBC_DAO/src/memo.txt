@@ -1,0 +1,23 @@
+drop table empl cascade constraints;
+
+create table empl(
+	num number primary key,
+	name varchar2(10),
+	deptno number,
+	salary number
+);
+
+drop sequence eseq;
+create sequence eseq
+	increment by 1
+	start with 1
+	minvalue 1
+	nocache;
+
+
+insert into empl values(eseq.nextval,'kim',1,100);
+insert into empl values(eseq.nextval,'park',2,200);
+
+commit;
+
+select * from empl;

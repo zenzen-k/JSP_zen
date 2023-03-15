@@ -1,0 +1,28 @@
+drop table register;
+
+create table register(
+	id varchar2(10) primary key,
+	passwd varchar2(10) not null,
+	name varchar2(20) not null,
+	gender varchar2(3) not null,
+	uname varchar2(10) not null,
+	dname varchar2(20) not null
+);
+
+insert into register(id,passwd,name,gender,uname,dname)
+values('a1','1111','태연','여','abc','naver.com');
+
+insert into register(id,passwd,name,gender,uname,dname)
+values('a2','2222','수영','여','xxx','yahoo.com');
+
+insert into register(id,passwd,name,gender,uname,dname)
+values('a3','3333','바로','남','yyy','daum.net');
+
+commit;
+
+col id for a6
+col passwd for a8
+col name for a10
+col uname for a8
+col dname for a15
+select * from register;

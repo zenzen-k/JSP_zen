@@ -49,3 +49,16 @@ insertProc.jsp<br>
 		System.out.println("계정 접속 종료");
 	}
 %>
+
+<!-- 2초뒤에 select.jsp 로 새로고침한다 -->
+<!-- <meta http-equiv="refresh" content="2; url=select.jsp"> -->
+
+<%-- <jsp:forward page="select.jsp"/> --%>
+
+<%-- <jsp:include page="select.jsp"/> --%>
+
+<%
+response.sendRedirect("select.jsp");
+%>
+
+응답정보를 저장. 응답 헤더에 대한 정보 설정

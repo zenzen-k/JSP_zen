@@ -40,7 +40,7 @@ select.jsp<br><br>
 		<td><%=mb.getTime()%></td>
 		<td><%=mb.getApprove()%></td>
 		<td><%=mb.getAgree()%></td>
-		<td><a href="updateForm.jsp">수정</a></td>
+		<td><a href="updateForm.jsp?num=<%=mb.getNum()%>">수정</a></td>
 		<td><a href="deleteProc.jsp?num=<%=mb.getNum()%>">삭제</a></td>
 	</tr>
 	<%

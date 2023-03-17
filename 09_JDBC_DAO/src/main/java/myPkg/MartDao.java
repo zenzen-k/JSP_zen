@@ -112,4 +112,70 @@ public class MartDao {
 		}
 		return cnt;
 	}
+	
+	/* 선택번호 레코드 가져오기 */
+	public MartBean getMartByNum(String num) {
+		MartBean mb = new MartBean();
+		
+		String sql = "select * from emart where num =" + num;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				mb.setNum(rs.getInt("num"));
+				mb.setId(rs.getString("id"));
+				mb.setPw(rs.getString("pw"));
+				mb.setProduct(rs.getString("product"));
+				mb.setTime(rs.getString("time"));
+				mb.setApprove(rs.getString("approve"));
+				mb.setAgree(rs.getString("agree"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(mb.getNum());
+		return mb;
+	}
+	
+	/* 수정 */
+	public int updateMart(MartBean mb) {
+		int cnt = -1;
+		String sql = "update emart set id=?, pw=?, product=?, time=?, approve=?, agree=? where num=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mb.getId());
+			ps.setString(2, mb.getPw());
+			ps.setString(3, mb.getProduct());
+			ps.setString(4, mb.getTime());
+			ps.setString(5, mb.getApprove());
+			ps.setString(6, mb.getAgree());
+			ps.setInt(7, mb.getNum());
+			// 만약에 번호를 안넘겼다면 int의 기본값인 0이 들어가게된당
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
 }

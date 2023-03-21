@@ -66,7 +66,7 @@ th{
 	ArrayList<StudentBean> lists = sdao.getAllStudent();
 %>
 	<tr>
-		<th><input type="checkbox" name="allcheck" onClick="allCheck()"></th>
+		<th><input type="checkbox" name="allcheck" onClick="allCheck(this)"></th>
 		<%for(String x : th){%>
 			<th><%=x%></th>
 		<%}%>

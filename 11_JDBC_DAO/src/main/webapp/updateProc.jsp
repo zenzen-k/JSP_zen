@@ -1,19 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
-	request.setCharacterEncoding("utf-8");
-
-	String h = request.getParameter("hobby");
+	request.setCharacterEncoding("UTF-8");
 %>
 <jsp:useBean id="sdao" class="myPkg.StudentDao"/>
 <jsp:useBean id="sb" class="myPkg.StudentBean"/>
 <jsp:setProperty property="*" name="sb"/>
 <%
-	System.out.println(sb.getHobby());
 	String str = "";
-	//if(h == null){
-	if(sb.getHobby() == null){
+	if(request.getParameter("hobby") == null){
 		str = "선택사항없음";
 	} else {
 		String[] hobby = request.getParameterValues("hobby");
@@ -23,15 +18,14 @@
 	}
 	sb.setHobby(str);
 	
-	int sum = sb.getC() + sb.getJava() + sb.getJsp();
-	sb.setSum(sum);
+	sb.setSum(sb.getC() + sb.getJava() + sb.getJsp());
 	
-	//System.out.print(sb.getSum());
-	int cnt = sdao.insertStudent(sb);
+	System.out.println("num " + sb.getNum());
+	int cnt = sdao.updateStudent(sb);
 	
+	System.out.println("cnt " + cnt);
 	if(cnt>0)
 		response.sendRedirect("select.jsp");
 	else
-		response.sendRedirect("insertForm.jsp");
-
+		response.sendRedirect("updateForm.jsp?num="+sb.getNum());
 %>

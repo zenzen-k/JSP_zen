@@ -128,4 +128,129 @@ public class StudentDao {
 		return cnt;
 	}
 	
+	//선택번호
+	public StudentBean getStudByNum(String num) {
+		StudentBean sb = new StudentBean();
+		String sql = "select * from student where num="+num;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				sb.setNum(rs.getInt("num"));
+				sb.setId(rs.getString("id"));
+				sb.setPasswd(rs.getString("passwd"));
+				sb.setName(rs.getString("name"));
+				sb.setYear(rs.getInt("year"));
+				sb.setMonth(rs.getInt("month"));
+				sb.setDay(rs.getInt("day"));
+				sb.setHobby(rs.getString("hobby"));
+				sb.setC(rs.getInt("c"));
+				sb.setJava(rs.getInt("java"));
+				sb.setJsp(rs.getInt("jsp"));
+				sb.setSum(rs.getInt("sum"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb;
+	}
+	
+	//수정
+	public int updateStudent(StudentBean sb) {
+		int cnt = -1;
+		String sql = "update student set id=?, passwd=?, name=?, year=?, month=?, day=?, "
+				+ "hobby=?, c=?, java=?, jsp=?, sum=? where num=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sb.getId());
+			ps.setString(2, sb.getPasswd());
+			ps.setString(3, sb.getName());
+			ps.setInt(4, sb.getYear());
+			ps.setInt(5, sb.getMonth());
+			ps.setInt(6, sb.getDay());
+			ps.setString(7, sb.getHobby());
+			ps.setInt(8, sb.getC());
+			ps.setInt(9, sb.getJava());
+			ps.setInt(10, sb.getJsp());
+			ps.setInt(11, sb.getSum());
+			ps.setInt(12, sb.getNum());
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	
+	//삭제
+	public int deleteStudent(String num) {
+		int cnt = -1;
+		String sql = "delete student where num="+num;
+		try {
+			ps = conn.prepareStatement(sql);
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
+	//선택삭제
+	public int selectDel(String[] num) {
+		int cnt = -1;
+		String sql = "delete student where num=? ";
+		for(int i=1; i<num.length; i++) {
+			sql += " or num=? ";
+		}
+		try {
+			ps = conn.prepareStatement(sql);
+			for(int i=0; i<num.length; i++) {
+				ps.setString(i+1, num[i]);
+			}
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(conn!=null)
+					conn.close();
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
 } // DAO

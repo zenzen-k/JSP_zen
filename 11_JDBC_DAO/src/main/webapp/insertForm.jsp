@@ -3,12 +3,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style type="text/css">
+	select, #c, #jsp, #java{
+		width: 70px; 
+	}
+	select[name=month], select[name=day]{
+		width: 50px;
+	}
+</style>
+
 <script type="text/javascript" src="./js/jquery.js"></script>
 <script type="text/javascript">
 	$(function() {
 		// alert(1);
 		
-		isCheck = false;
+		isCheck = false; 
 		use = "";
 		
 		$('#idbtn').click(function() {
@@ -19,6 +28,13 @@
 					userid : $("input[name=id]").val()
 				}),
 				success : function(data) {
+					
+					if( $.trim($("input[name=id]").val())==""){
+						alert("아이디를 입력하세요");
+						$("input[name=id]").focus();
+						return;
+					}
+					
 					// alert(data);
 					if( $("input[name=id]").val()==""){
 						alert("아이디를 입력하세요");
@@ -55,24 +71,25 @@
 		
 		$('input[name=id]').keydown(function() {
 			$('#idcheck').css('display','none');
-			use = "";
-			isCheck = false;
+			use = ""; // 이미사용중이다 라는 메세지가 계속 저장되어있으므로 초기화해주어야 한다.
+			isCheck = false; // 한번 검사하고나서는 값을 잘못입력해도 넘어간당 따라서 false로 다시 초기화
 		});
 		
+		
+		$('select[name=month]').change(function() {
+			$('select[name=day]').empty();
+			
+			var year = $('select[name=year]').val();
+			var month = $('select[name=month]').val();
+			
+			var d = new Date(year, month, 0).getDate();
+			// alert(d);
+			for(i=1; i<=d; i++){
+				$('select[name=day]').append("<option value='"+i+"'>" +i+"</option>");
+				//document.getElementByName('day').options[i-1] = new Option(i);
+			}
+		});
 	});
-	
-	
-	function date() {
-		year = document.getElementByName('year').text();
-		month = document.getElementByName('month').text();
-		
-		var d = new Date(year, month, 0).getDate();
-		
-		for(i=1; i<=d; i++){
-			$('input[name=""]')
-			document.write("<option value='"+i+"'>"+i+"</option>")
-		}
-	}
 </script>
 
 
@@ -99,18 +116,14 @@
 		%>
 	</select> 년 
 	
-	<select name="month" onchange="date()">
+	<select name="month">
 		<%for(int i=1; i<=12; i++){%>
 			<option value="<%=i%>"><%=i%></option>
 		<%}%>
 	</select> 월 
 	
-	<select name="date" >
-		<%-- <%
-		for(int i=1; i<=31; i++){
-		%>
-			<option value="<%=i%>"><%=i%></option>
-		<%}%> --%>
+	<select name="day">
+		<option value="1">1</option>
 	</select> 일<br><br>
 	
 	취미 : 
@@ -122,12 +135,11 @@
 	<br><br><br>
 	
 	[점수입력]<br>
-	C언어 : <input type="text" name="c">
-	JAVA : <input type="text" name="java">
-	JSP : <input type="text" name="jsp">
+	C언어 : <input type="text" name="c" id="c">
+	JAVA : <input type="text" name="java" id="java">
+	JSP : <input type="text" name="jsp" id="jsp">
 	<br><br>
 	
 	<input type="submit" value="가입하기" id="sub" onclick="return check()">
 
 </form>
-

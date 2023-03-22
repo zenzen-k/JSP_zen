@@ -11,8 +11,6 @@
 		$("#chk").click(function() {
 			//alert(2);
 			
-			isCheck = true;
-			
 			$.ajax({
 				url : "idCheckProc.jsp" ,
 				data : ({
@@ -20,7 +18,8 @@
 				}),
 				success : function(data) {
 					//alert(data);
-					
+					isCheck = true;
+			
 					if( $('input[name=id]').val() == ""){
 						alert("아이디를 입력하세요");
 						$('input[name=id]').focus();
@@ -46,7 +45,7 @@
 				alert("이미 존재하는 아이디입니다");
 				$('input[name=id]').select();
 				return false;
-			}else if($('input[name=id]').val() == ""){
+			}else if($('input[name=id]').val() == ""){ // val().length = 0
 				alert("아이디를 입력하세요");
 				$('input[name=id]').focus();
 				return false;
@@ -118,7 +117,7 @@
 	
 	<tr>
 		<td>영화관 개선사항</td>
-		<td><textarea row="4" cols="40" name="memo"></textarea></td>
+		<td><textarea rows="4" cols="40" name="memo"></textarea></td>
 	</tr>
 	
 	<tr>

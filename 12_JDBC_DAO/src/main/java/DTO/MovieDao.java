@@ -89,7 +89,7 @@ public class MovieDao {
 			}
 		}
 		return cnt;
-	}
+	}//insertMovie
 	
 	//아이디검사
 	public boolean searchId(String id) {
@@ -117,7 +117,7 @@ public class MovieDao {
 			}
 		}
 		return result;
-	}
+	}//searchId
 	
 	// 조건 - 레코드가져오기
 	public MovieBean getMovieByNum(String num) {
@@ -151,7 +151,7 @@ public class MovieDao {
 			}
 		}
 		return mb;
-	}
+	}//getMovieByNum
 	
 	public int updateMovie(MovieBean mb) {
 		int cnt = -1;
@@ -181,7 +181,7 @@ public class MovieDao {
 			}
 		}
 		return cnt;
-	}
+	}//updateMovie
 	
 	public int deleteMovie(String num) {
 		int cnt = -1;
@@ -202,7 +202,7 @@ public class MovieDao {
 			}
 		}
 		return cnt;
-	}
+	}//deleteMovie
 	
 	public int selectDel(String[] num) {
 		int cnt = -1;
@@ -228,7 +228,6 @@ public class MovieDao {
 				e.printStackTrace();
 			}
 		}
-		
 		return cnt;
-	}
+	}//selectDel
 }

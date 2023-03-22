@@ -26,5 +26,5 @@
 	if(cnt == 1)
 		response.sendRedirect("select.jsp");
 	else
-		response.sendRedirect("updateForm.jsp");
+		response.sendRedirect("updateForm.jsp?num=" + mb.getNum());
 %>

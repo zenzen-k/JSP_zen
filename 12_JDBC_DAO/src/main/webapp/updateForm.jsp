@@ -67,7 +67,7 @@
 	<tr>
 		<td>영화관 개선사항</td>
 		<td>
-		<textarea row="4" cols="40" name="memo"><%if(mb.getMemo().equals("없음")){%><%}else{%><%=mb.getMemo()%><%}%></textarea>
+		<textarea rows="4" cols="40" name="memo"><%if(mb.getMemo().equals("없음")){%><%}else{%><%=mb.getMemo()%><%}%></textarea>
 			</td>
 	</tr>
 	

@@ -32,7 +32,7 @@
 		rowch = document.getElementsByName("rowcheck");
 		for(i=0; i<rowch.length; i++){
 			if(rowch[i].checked){
-				flag = true
+				flag = true;
 			}
 		}
 		if(!flag){
@@ -57,7 +57,9 @@
 %>
 	<tr>
 		<th><input type="checkbox" name="allcheck" onclick="allCheck(this)"></th>
-		<%for(int i=0; i<th.length; i++){%><th><%=th[i]%></th><%} %>
+		<%for(int i=0; i<th.length; i++){%>
+			<th><%=th[i]%></th>
+		<%} %>
 	</tr>
 	
 	<%for(MovieBean mb : lists){%>

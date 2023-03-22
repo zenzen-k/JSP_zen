@@ -1,12 +1,16 @@
+<%@page import="myPkg.StudentDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean id="sdao" class="myPkg.StudentDao"/>
+<%-- <jsp:useBean id="sdao" class="myPkg.StudentDao"/> --%>
 <jsp:useBean id="sb" class="myPkg.StudentBean"/>
 <jsp:setProperty property="*" name="sb"/>
 <%
+	StudentDao sdao = StudentDao.getInstance();
+	System.out.println("updateProc sdao : " + sdao);
+
 	String str = "";
 	if(request.getParameter("hobby") == null){
 		str = "선택사항없음";

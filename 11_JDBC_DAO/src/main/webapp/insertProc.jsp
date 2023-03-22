@@ -1,3 +1,4 @@
+<%@page import="myPkg.StudentDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -6,10 +7,14 @@
 
 	String h = request.getParameter("hobby");
 %>
-<jsp:useBean id="sdao" class="myPkg.StudentDao"/>
+<%-- <jsp:useBean id="sdao" class="myPkg.StudentDao"/> --%>
 <jsp:useBean id="sb" class="myPkg.StudentBean"/>
 <jsp:setProperty property="*" name="sb"/>
 <%
+
+	StudentDao sdao = StudentDao.getInstance();
+	System.out.println("insertProc sdao : " + sdao);
+
 	System.out.println(sb.getHobby());
 	String str = "";
 	//if(h == null){

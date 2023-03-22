@@ -1,3 +1,4 @@
+<%@page import="myPkg.StudentDao"%>
 <%@page import="myPkg.StudentBean"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -33,8 +34,11 @@
 	});
 </script>
 
-<jsp:useBean id="sdao" class="myPkg.StudentDao"/>
+<%-- <jsp:useBean id="sdao" class="myPkg.StudentDao"/> --%>
 <%
+	StudentDao sdao = StudentDao.getInstance();
+	System.out.println("updateForm sdao : " + sdao);
+	
 	String num = request.getParameter("num");
 	//StudentDao sdao = new StudentDao();
 	StudentBean sb = sdao.getStudByNum(num);

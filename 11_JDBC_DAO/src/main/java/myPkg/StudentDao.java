@@ -11,7 +11,7 @@ public class StudentDao {
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	
-	public StudentDao() {
+	private StudentDao() {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, "jspid", "jsppw");
@@ -22,6 +22,15 @@ public class StudentDao {
 			e.printStackTrace();
 		}
 	} // 생성자
+	// 싱글톤
+	private static StudentDao sdao;
+	public static StudentDao getInstance() {
+		if(sdao == null)
+			sdao = new StudentDao();
+		return sdao;
+	}
+	
+	
 	
 	// 전체조회
 	public ArrayList<StudentBean> getAllStudent(){
@@ -53,8 +62,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 				if(rs!=null)
@@ -81,8 +90,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 				if(rs!=null)
@@ -117,8 +126,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 			} catch (SQLException e) {
@@ -153,8 +162,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 				if(rs!=null)
@@ -191,8 +200,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 			} catch (SQLException e) {
@@ -214,8 +223,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 			} catch (SQLException e) {
@@ -242,8 +251,8 @@ public class StudentDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(conn!=null)
-					conn.close();
+				//if(conn!=null)
+				//	conn.close();
 				if(ps!=null)
 					ps.close();
 			} catch (SQLException e) {

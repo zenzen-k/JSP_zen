@@ -1,3 +1,4 @@
+<%@page import="myPkg.StudentDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="myPkg.StudentBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -57,11 +58,14 @@ th{
 	}
 </script>
 
-<jsp:useBean id="sdao" class="myPkg.StudentDao"/>
+<%-- <jsp:useBean id="sdao" class="myPkg.StudentDao"/> --%>
 
 <form name="myform" action="allDelete.jsp" method="post">
 <table border='1'>
 <%
+	StudentDao sdao = StudentDao.getInstance();
+	System.out.println("sdao : " + sdao);
+
 	String[] th = {"번호","아이디","비번","이름","생년월일","취미","C언어","JAVA","JSP","합계","수정","삭제"};
 	ArrayList<StudentBean> lists = sdao.getAllStudent();
 %>

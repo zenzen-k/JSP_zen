@@ -1,8 +1,13 @@
+<%@page import="myPkg.StudentDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:useBean id="sdao" class="myPkg.StudentDao"/>
+<%-- <jsp:useBean id="sdao" class="myPkg.StudentDao"/> --%>
 <%
+	StudentDao sdao = StudentDao.getInstance();
+	System.out.println("allDelete sdao : " + sdao);
+
+
 	//System.out.println(request.getParameter("rcheck"));
 	String[] num = request.getParameterValues("rcheck");
 	

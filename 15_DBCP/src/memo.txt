@@ -1,0 +1,11 @@
+drop table tdbcp;
+
+create table tdbcp(
+	name varchar2(10) not null,
+	email varchar2(20) not null
+);
+
+col name for a10
+col email for a10
+
+select * from tdbcp;

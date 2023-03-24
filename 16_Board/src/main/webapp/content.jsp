@@ -25,6 +25,7 @@
 	}
 </style>
 <%
+	String pageNum = request.getParameter("pageNum");
 	String num = request.getParameter("num");
 	
 	BoardDao bdao = BoardDao.getInstance();
@@ -62,8 +63,8 @@
 	
 	<tr>
 		<td colspan="4" align="right">
-			<input type="button" value="글수정" onClick="location.href='updateForm.jsp?num=<%=bb.getNum()%>'">
-			<input type="button" value="글삭제">
+			<input type="button" value="글수정" onClick="location.href='updateForm.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
+			<input type="button" value="글삭제" onClick="location.href='deleteForm.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>'">
 			<input type="button" value="답글쓰기">
 			<input type="button" value="글목록" onclick="location.href='select.jsp'">
 		</td>

@@ -113,6 +113,7 @@ public class BoardDao {
 		return count;
 	}
 	
+	// 원글쓰기
 	public int insertArticle(BoardBean bb) {
 		int cnt = -1;
 		String sql = "insert into board(num, writer, email, subject, passwd, reg_date, ref, re_step, re_level, content, ip) "
@@ -235,5 +236,85 @@ public class BoardDao {
 			}
 		}
 		return bb;
-	}
+	} //getContentByNum
+	
+	
+	// 입력된 비밀번호 검사,
+	public int updateArticle(BoardBean bb){ // 6가지가 넘어왔음
+		int cnt = -1; // 성공 :1 , sql조건실패 :0, 수정실패 :-1, 비밀번호틀림 :-2
+		
+		// 원래 비밀번호 가져오기
+		String dbpw = "";
+		String sql = "select passwd from board where num=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bb.getNum());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dbpw = rs.getString("passwd"); // DB에 저장된 비번
+				
+				// 비밀번호 비교
+				if(dbpw.equals(bb.getPasswd())) { // 비밀번호 일치하면
+					// 패스워드는 수정대상이 아니다.
+					sql = "update board set writer=?, email=?, subject=?, content=? where num=?";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, bb.getWriter());
+					ps.setString(2, bb.getEmail());
+					ps.setString(3, bb.getSubject());
+					ps.setString(4, bb.getContent());
+					ps.setInt(5, bb.getNum());
+					
+					cnt = ps.executeUpdate();
+				} else { // 다를때
+					cnt = -2;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	} //updateArticle
+	
+	public int deleteArticle(String num, String passwd) {
+		int cnt = -1;
+		String dbpw = "";
+		String sql = "select passwd from board where num=?";
+		String sql2 = "delete board where num=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, num);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dbpw = rs.getString("passwd");
+				
+				if(dbpw.equals(passwd)) {
+					ps = conn.prepareStatement(sql2);
+					ps.setString(1, num);
+					cnt = ps.executeUpdate();
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+				if(rs!=null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	} //deleteArticle
 }

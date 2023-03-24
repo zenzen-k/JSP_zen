@@ -22,14 +22,20 @@ content.jsp(글수정 num) => updateForm.jsp<br>
 	}
 </style>
 
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="script.js"></script> <!-- writeSave 함수호출을 위해서  -->
+
 <%
+	String pageNum = request.getParameter("pageNum");
 	String num = request.getParameter("num");
 	BoardDao bdao = BoardDao.getInstance();
 	BoardBean bb = bdao.getContentByNum(num);
 %>
 
 <b>글수정</b>
-<form name="updateForm" action="updateProc.jsp" onsubmit="return writeSave()">
+<form name="writeForm" action="updateProc.jsp" onsubmit="return writeSave()">
+<input type="hidden" name="num" value="<%=num%>">
+<input type="hidden" name="pageNum" value="<%=pageNum%>">
 <table>
 	<tr>
 		<td>이 름</td>

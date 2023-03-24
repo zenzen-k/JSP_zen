@@ -77,8 +77,19 @@
 		<%for(BoardBean bb : lists){ %>
 		<tr height="30" align="center" bgcolor="<%=value_c%>">
 			<td><%=bb.getNum()%></td> 
-			<td>
-				<a href="content.jsp?num=<%=bb.getNum()%>"><%=bb.getSubject() %></a>
+			<td align="left">
+				<%
+					int wid = 20;
+					if(bb.getRe_level() > 0){ // 0보다 크다는 것은 원글이 아님. 즉 답글
+						wid = 20 * bb.getRe_level(); // 1:20, 2:40, 3:60
+				%>
+						<img src="images/level.gif" width="<%=wid%>" height="10">
+						<img src="images/re.gif">
+				<%
+					}
+				%>
+				
+				<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a>
 			</td>
 			<td><%=bb.getWriter() %></td>
 			<td><%=sdf.format(bb.getReg_date())%></td>

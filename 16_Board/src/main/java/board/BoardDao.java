@@ -317,4 +317,49 @@ public class BoardDao {
 		}
 		return cnt;
 	} //deleteArticle
+	
+	public int replyArticle(BoardBean bb) {
+		// 10가지 정보가 넘어옴. 7:답글내용 3:부모정보
+		int cnt = -1;
+		
+		int re_step = 0, re_level = 0;
+		// 기존에 있던것들 먼저 수정작업 후 insert 해주어야 함.
+		String sql = "update board set re_step = re_step+1 where ref=? and re_step>?";
+		String sql2 = "insert into board values(board_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			// update
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bb.getRef());
+			ps.setInt(2, bb.getRe_step());
+			re_step = bb.getRe_step() +1;
+			re_level = bb.getRe_level() +1;
+			ps.executeUpdate();
+			
+			// insert
+			ps = conn.prepareStatement(sql2);
+			ps.setString(1, bb.getWriter());
+			ps.setString(2, bb.getEmail());
+			ps.setString(3, bb.getSubject());
+			ps.setString(4, bb.getPasswd());
+			ps.setTimestamp(5, bb.getReg_date());
+			ps.setInt(6, 0); // readcount 
+			ps.setInt(7, bb.getRef()); // ref
+			ps.setInt(8, re_step); // re_step
+			ps.setInt(9, re_level); // re_level
+			ps.setString(10, bb.getContent());
+			ps.setString(11, bb.getIp());
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	} // replyArticle
 }

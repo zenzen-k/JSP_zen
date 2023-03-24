@@ -44,7 +44,7 @@ String pageNum = request.getParameter("pageNum");
 	<tr>
 		<td>
 			<input type="submit" value="글삭제">
-			<input type="button" value="글목록" onclick="location.href='select.jsp'">
+			<input type="button" value="글목록" onclick="location.href='select.jsp?pageNum=<%=pageNum%>'">
 		</td>
 	</tr>
 </table>

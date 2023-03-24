@@ -33,16 +33,24 @@
 	int startRow = (currentPage-1) * pageSize + 1; // 1페이지라면 (1-1) * 5 +1 = 1
 	int endRow = currentPage * pageSize; // 1페이지라면 1 * 5 = 5
 	
+	// pageNum=1 일때 startRow=1 , endRow=5
+	// pageNum=2 일때 startRow=6 , endRow=10
+	// memo 보기 getArticles
 	
-	
-	
+
 	BoardDao bdao = BoardDao.getInstance();
 	ArrayList<BoardBean> lists = null;
-	int count = bdao.getArticleCount();
+	int count = bdao.getArticleCount(); // 전체레코드수
 	
 	if(count > 0){
 		lists = bdao.getArticles(startRow, endRow);
 	}
+	
+	
+	int number = count-(currentPage-1) * pageSize;
+	// 1페이지 : 19(1-1)*5 ; -> 19
+	// 1페이지 : 19(2-1)*5 ; -> 18
+	
 %>
 
 
@@ -76,7 +84,7 @@
 		</tr>
 		<%for(BoardBean bb : lists){ %>
 		<tr height="30" align="center" bgcolor="<%=value_c%>">
-			<td><%=bb.getNum()%></td> 
+			<td><%=number--%></td> 
 			<td align="left">
 				<%
 					int wid = 20;
@@ -90,6 +98,13 @@
 				%>
 				
 				<a href="content.jsp?num=<%=bb.getNum()%>&pageNum=<%=pageNum%>"><%=bb.getSubject() %></a>
+				<%
+				if(bb.getReadcount()>=10){
+					%>
+					<img src="images/hot.gif" width="15">
+					<%
+				}
+				%>
 			</td>
 			<td><%=bb.getWriter() %></td>
 			<td><%=sdf.format(bb.getReg_date())%></td>

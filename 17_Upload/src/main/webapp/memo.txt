@@ -1,0 +1,13 @@
+
+웹서버폴더 : C:\JSP_zen\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\17_Upload
+
+서블릿파일 : C:\JSP_zen\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\17_Upload\org\apache\jsp
+
+
+
+
+[ 파일업로드 규칙 ]
+
+method : post
+cos.jar 화일이 필요하다
+form 속성에 enctype="multipart/form-data"가 필요함

@@ -15,9 +15,9 @@ dbcp.jsp<br>
 	// InitialContext은 NamingException 예외발생. 원래는 예외처리 해줘야하지만 서블릿이 자동으로해쥼~
 	try{
 		Context initContext = new InitialContext(); 
-		Context envContext = (Context)initContext.lookup("java:comp/env");
-		DataSource ds = (DataSource)envContext.lookup("jdbc/OracleDB");
-		conn = ds.getConnection();
+		Context envContext = (Context)initContext.lookup("java:comp/env"); // 설정정보가 자동저장된다
+		DataSource ds = (DataSource)envContext.lookup("jdbc/OracleDB"); // 
+		conn = ds.getConnection(); // 정보에 따라서 접속해라~
 		System.out.println("conn : " + conn);
 		
 		String name = request.getParameter("name");

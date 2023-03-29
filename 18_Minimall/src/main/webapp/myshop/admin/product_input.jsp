@@ -1,48 +1,53 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="my.shop.CategoryBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="my.shop.CategoryDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- top.jsp -> product_input.jsp<br> -->
-<style type="text/css">
-	table:nth-child(2){
-		border-top: double;
-		border-bottom: double;
-	}
-	th{
-		background-color: #fc0;
-	}
-</style>
+
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	//alert(1);
+	//$('th').attr('class',"m2");
+	$('th').addClass("m2");
+});
+</script>
+
 <%@ include file="top.jsp" %> <!-- 2번쨰 tr 시작 -->
 
 <%
 	String[] pspec = {"::NORMAL::","HIT","NEW","BEST"};
 	CategoryDao cdao = CategoryDao.getInstance();
 	ArrayList<CategoryBean> lists = cdao.getAllCategory();
-	String[] pcategory = new String[lists.size()];
+	/* String[] pcategory = new String[lists.size()];
 	
 	for(int i = 0; i<lists.size(); i++){
 		pcategory[i] = lists.get(i).getCname() + " [" + lists.get(i).getCode() +"]";
-	}
+	} */
 %>
 <td colspan="6" align="center" valign="top">
-	product_input.jsp<br>
 	<b>상품등록카테고리</b>
 	
-	<form action="" method="post">
-	
-	<input type="hidden" name="pinputdate">
-	
-	<table width="600">
+	<form action="productProc.jsp" method="post" enctype="multipart/form-data">
+	<table width="600" class="outline">
 		<tr>
 			<th>카테고리</th>
 			<td>
 				<select name="pcategory_fk">
 					<%
-					for(String x : pcategory){
+					if(lists.size() == 0){
 					%>
-						<option value=<%=x%>><%=x%></option>
-					<%
+						<option value="">카테고리 없음</option>
+					<%	
+					}else{
+						for(CategoryBean cate : lists){
+						%>
+							<option value="<%=cate.getCode()%>"><%=cate.getCname()%> [<%=cate.getCode()%>]</option>
+						<%
+						}
 					}
 					%>
 				</select>
@@ -56,7 +61,7 @@
 		
 		<tr>
 			<th>상품코드</th>
-			<td><input type="text" name="pname" value="이름"></td>
+			<td><input type="text" name="pcode" value="이름"></td>
 		</tr>
 		
 		<tr>
@@ -73,7 +78,7 @@
 		
 		<tr>
 			<th>상품 수량</th>
-			<td><input type="text" name="pqty" value="3"></td>
+			<td><input type="text" name="pqty" maxlength="5" value="3"></td><!-- 5자리 -> 99,999 -->
 		</tr>
 		
 		<tr>
@@ -88,7 +93,7 @@
 					<%
 					for(String x : pspec){
 					%>
-						<option value=<%=x%>><%=x%></option>
+						<option value="<%=x%>"><%=x%></option>
 					<%
 					}
 					%>
@@ -99,7 +104,7 @@
 		<tr>
 			<th>상품 소개</th>
 			<td>
-				<textarea rows="4" cols="50" name="pcontents">설명</textarea>
+				<textarea rows="4" cols="50" name="pcontents" style="resize: none">설명</textarea>
 			</td>
 		</tr>
 		
@@ -108,8 +113,8 @@
 			<td><input type="text" name="point" value="100"></td>
 		</tr>
 		
-		<tr bgcolor="#aaa">
-			<td colspan="2" align="center">
+		<tr>
+			<td colspan="2" align="center" class="m1">
 				<input type="submit" value="상품 등록">
 				<input type="reset" value="취소">
 			</td>

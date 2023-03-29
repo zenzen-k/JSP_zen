@@ -61,7 +61,7 @@ public class CategoryDao {
 		return cnt;
 	}
 	
-	/* 전체 카테고리 조회 */
+	/* 전체 카테고리 조회 */ // 카테고리목록보기, 상품등록 폼 에서 사용됨
 	public ArrayList<CategoryBean> getAllCategory() {
 		ArrayList<CategoryBean> lists = new ArrayList<CategoryBean>();
 		String sql = "select * from category order by cnum";

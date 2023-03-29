@@ -31,7 +31,7 @@
 			<a href="product_input.jsp">상품 등록</a>
 		</td>
 		<td align="center">
-			<a href="">상품 목록</a>
+			<a href="product_list.jsp">상품 목록</a>
 		</td>
 		<td align="center">
 			<a href="">쇼핑 내역</a>

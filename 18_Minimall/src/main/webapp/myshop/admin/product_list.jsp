@@ -5,6 +5,23 @@
 	pageEncoding="UTF-8"%>
 <!-- product_list.jsp<br> -->
 
+<script>
+	function deleteCheck(pnum, pimage) {
+		// alert(pnum + "," + pimage);
+		
+		// 대화상자 : alert, confirm, prompt
+		var isDel = confirm("정말 삭제하시겠습니까?");
+		//alert(isval); // 확인버튼 : true | 취소 : false
+		
+		if(isDel){
+			location.href="product_delete.jsp?pnum="+pnum+"&pimage="+pimage;
+		}
+		
+	}
+</script>
+
+
+
 <%@ include file="top.jsp"%>
 
 <td colspan="6" align="center" valign="top">
@@ -29,23 +46,24 @@
 			out.print("<tr><td colspan='8' align='center'>등록한 상품이 없습니다<td></tr>");
 		}
 		else{
-			for(int i=0; i<lists.size(); i++){ %>
+			for(ProductBean pb : lists){ %>
 			<tr>
-				<td align="center"><%=lists.get(i).getPnum()%></td>
-				<td align="center"><%=lists.get(i).getPcategory_fk()%></td>
-				<td align="center"><%=lists.get(i).getPname()%></td>
+				<td align="center"><%=pb.getPnum()%></td>
+				<td align="center"><%=pb.getPcategory_fk()%></td>
+				<td align="center"><%=pb.getPname()%></td>
 				<td align="center">
-					<a href="product_view.jsp?pnum=<%=lists.get(i).getPnum()%>">
+					<a href="product_view.jsp?pnum=<%=pb.getPnum()%>">
 						<img width="40" height="40" alt="없음" 
-						src="<%=request.getContextPath() + "/myshop/images/" + lists.get(i).getPimage()%>">
+						src="<%=request.getContextPath() + "/myshop/images/" + pb.getPimage()%>">
 					</a>
 				</td>
-				<td align="right"><%=lists.get(i).getPrice()%></td>
-				<td align="center"><%=lists.get(i).getPcompany()%></td>
-				<td align="right"><%=lists.get(i).getPqty()%></td>
+				<td align="right"><%=pb.getPrice()%></td>
+				<td align="center"><%=pb.getPcompany()%></td>
+				<td align="right"><%=pb.getPqty()%></td>
 				<td align="center">
-					<a href="product_update.jsp">수정</a> | 
-					<a href="product_delete.jsp?pnum=<%=lists.get(i).getPnum()%>">삭제</a></td>
+					<a href="product_update.jsp?pnum=<%=pb.getPnum()%>">수정</a> | 
+					<%-- <a href="product_delete.jsp?pnum=<%=lists.get(i).getPnum()%>&pimage=<%=lists.get(i).getPimage()%>">삭제</a></td> --%>
+					<a href="javascript:deleteCheck('<%=pb.getPnum()%>','<%=pb.getPimage()%>')">삭제</a></td>
 			</tr>
 			<% }
 		}%>

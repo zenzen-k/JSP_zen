@@ -161,6 +161,7 @@ public class ProductDao {
 		return pb;
 	}
 	
+	/* 상품삭제 */
 	public int productDelete(String pnum) {
 		int cnt = -1;
 		String sql = "delete product where pnum=" + pnum;
@@ -179,4 +180,36 @@ public class ProductDao {
 		}
 		return cnt;
 	}
+	
+	/* 상품수정 */
+	public int updateProduct(MultipartRequest mr, String pimage) {
+		int cnt = -1;
+		String sql = "update product set pname=?, pcompany=?, pimage=?, pqty=?, price=?, pspec=?, pcontents=?, point=? where pnum=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mr.getParameter("pname"));
+			ps.setString(2, mr.getParameter("pcompany"));
+			ps.setString(3, pimage);
+			// 숫자컬럼이지만 문자를 넣어도 문제는 안되지만 정확하게 하는게 좋음~
+			ps.setInt(4, Integer.parseInt(mr.getParameter("pqty")));
+			ps.setInt(5, Integer.parseInt(mr.getParameter("price")));
+			ps.setString(6, mr.getParameter("pspec"));
+			ps.setString(7, mr.getParameter("pcontents"));
+			ps.setInt(8, Integer.parseInt(mr.getParameter("point")));
+			ps.setString(9, mr.getParameter("pnum"));
+			
+			cnt = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
+	
 }

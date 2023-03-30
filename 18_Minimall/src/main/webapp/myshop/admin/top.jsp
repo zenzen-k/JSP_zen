@@ -15,9 +15,9 @@
 
 
 <font size="6">쇼핑몰(관리자용)</font><br><br>
-<a href="">쇼핑몰홈</a>
-<a href="">로그인</a>
-<a href="">로그아웃</a>
+<a href="main.jsp">쇼핑몰홈</a>
+<a href="<%=request.getContextPath()%>/main.jsp">로그인</a>
+<a href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
 <br><br>
 <table border="1" width="800" height="400">
 	<tr height="40">
@@ -34,10 +34,10 @@
 			<a href="product_list.jsp">상품 목록</a>
 		</td>
 		<td align="center">
-			<a href="">쇼핑 내역</a>
+			<a href="shopping_list.jsp">쇼핑 내역</a>
 		</td>
 		<td align="center">
-			<a href="">사용자 홈</a>
+			<a href="<%=request.getContextPath()%>/myshop/display/mall.jsp">사용자 홈</a>
 		</td>
 	</tr>
 	

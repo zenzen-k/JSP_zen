@@ -22,6 +22,10 @@ main.jsp -> loginProc.jsp<br>
 		else{ //일반
 			viewPage = request.getContextPath() + "/myshop/display/mall.jsp";
 		}
+		
+		//존재하면 세션설정을 함
+		session.setAttribute("sid", _id); // sid = admin , sid = hong ... 
+		
 	} else{ //존재하지 않음
 		viewPage = "main.jsp";
 	%>

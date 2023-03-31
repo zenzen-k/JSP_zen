@@ -124,7 +124,7 @@ public class ProductDao {
 		return lists;
 	}
 	
-	/* 조건조회 */
+	/* 조건조회 */ // 쇼핑몰홈-상세보기, 관리자페이지-이미지클릭상세보기, 장바구니, 
 	public ProductBean getProductByNum(String pnum) {
 		ProductBean pb = new ProductBean();
 		String sql = "select * from product where pnum=" + pnum;
@@ -210,6 +210,87 @@ public class ProductDao {
 			}
 		}
 		return cnt;
+	}
+	
+	/**/
+	public ArrayList<ProductBean> getProductByPspec(String pspec) {
+		ArrayList<ProductBean> lists = new ArrayList<ProductBean>();
+		String sql = "select * from product where pspec=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pspec);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				
+				pb.setPnum(rs.getInt("pnum"));
+				pb.setPname(rs.getString("pname"));
+				pb.setPcategory_fk(rs.getString("pcategory_fk"));
+				pb.setPcompany(rs.getString("pcompany"));
+				pb.setPimage(rs.getString("pimage"));
+				pb.setPqty(rs.getInt("pqty"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setPspec(rs.getString("pspec"));
+				pb.setPcontents(rs.getString("pcontents"));
+				pb.setPoint(rs.getInt("point"));
+				pb.setPinputdate(rs.getString("pinputdate"));
+				
+				lists.add(pb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lists;
+	}
+	
+	/* 다른방법 */
+	public ArrayList<ProductBean> getProductByCategory(String code) {
+		ArrayList<ProductBean> lists = new ArrayList<ProductBean>();
+		String sql = "select * from product where pcategory_fk like ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, code+"%"); // man% woman%
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setPnum(rs.getInt("pnum"));
+				pb.setPname(rs.getString("pname"));
+				pb.setPcategory_fk(rs.getString("pcategory_fk"));
+				pb.setPcompany(rs.getString("pcompany"));
+				pb.setPimage(rs.getString("pimage"));
+				pb.setPqty(rs.getInt("pqty"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setPspec(rs.getString("pspec"));
+				pb.setPcontents(rs.getString("pcontents"));
+				pb.setPoint(rs.getInt("point"));
+				pb.setPinputdate(rs.getString("pinputdate"));
+				
+				lists.add(pb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return lists;
 	}
 	
 }

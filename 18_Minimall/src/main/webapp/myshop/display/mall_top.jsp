@@ -28,12 +28,12 @@
 	.right{
 		float : right;
 	}
-</style>
+</style>  
 <%
 	String conPath = request.getContextPath();
 
 	CategoryDao cdao = CategoryDao.getInstance();
-	ArrayList<CategoryBean> lists = cdao.getAllCategory();
+	ArrayList<CategoryBean> clists = cdao.getAllCategory();
 	
 	/* 세션 설정한 아이디 가져오기 */
 	//Object sid = session.getAttribute("sid");
@@ -53,7 +53,7 @@
 				}
 				%>
 				<a href="mall.jsp">쇼핑몰홈</a> | 
-				<a href="">장바구니</a> | 
+				<a href="mall_cartList.jsp">장바구니</a> | 
 				<a href="">게시판</a> | 
 				<a href="">회사소개</a>
 			</div>
@@ -68,13 +68,13 @@
 	</tr>
 	
 	<tr>
-		<td width="20%" align="center">
+		<td width="20%" align="center" valign="top">
 			카테고리
 			<table border="1" width="100%">
-				<%for(CategoryBean cb : lists){%>
+				<%for(CategoryBean cb : clists){%>
 					<tr>
 						<td>
-							<a href=""><%=cb.getCname()%>[<%=cb.getCode()%>]</a>
+							<a href="<%=conPath%>/myshop/display/mall_cgList.jsp?code=<%=cb.getCode()%>&cname=<%=cb.getCname()%>"><%=cb.getCname()%>[<%=cb.getCode()%>]</a>
 						</td>
 					</tr>
 				<%}%>

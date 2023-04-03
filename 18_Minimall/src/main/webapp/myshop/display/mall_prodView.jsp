@@ -8,6 +8,13 @@
 
 <%@ include file="mall_top.jsp" %>
 
+<%
+	/* request, response, out, session, config .. */
+	
+	// ServletContext application = new ServletContext();
+	application.setAttribute("flag1", true); // 속성명, 값 flag1 = true;
+%>
+
 
 <script type="text/javascript">
 	function goCart(pnum) {
@@ -24,7 +31,16 @@
 		}
 		
 		location.href = "<%=conPath%>/myshop/display/mall_cartAdd.jsp?pnum=" + pnum + "&oqty=" + oqty;
-	}
+	}//goCart
+	
+	// 즉시주문 눌렀을때
+	function goOrder(pnum) {
+		// 여기서 도큐먼트 액션 설정이 가능함
+		document.f.action ="mall_order.jsp?pnum=" + pnum; // pnum, oqty 
+		// 아래form에서 작성한 내용이 넘어감! 따라서 따로 주문수량을 작성해주지 않아도 된당
+		// pnum은 따로 넘겨줘야함
+		document.f.submit(); // 액션으로 가기위해서는 submit으로 가야함!
+	}//goOrder
 </script>
 
 
@@ -63,7 +79,10 @@
 						</a>
 					</td>
 					<td>
-						<button type="button"><img src="<%=conPath%>/myshop/images/orderbtn.gif" width="110" height="30"></button>
+						<!-- 결제내역서 보기 넘어가야하는데 그전에 장바구니에 상품을 담아놓고 바로! -->
+						<a href="javascript:goOrder(<%=pnum%>)">
+							<img src="<%=conPath%>/myshop/images/orderbtn.gif" width="110" height="30">
+						</a>
 					</td>
 				</tr>
 			</table>

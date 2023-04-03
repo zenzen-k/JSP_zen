@@ -16,6 +16,8 @@ main.jsp -> loginProc.jsp<br>
 	
 	if(member != null){//존재여부
 		String _id = member.getId();
+		int no = member.getNo(); // 회원의 번호
+		
 		if(_id.equals("admin")){ //관리자
 			viewPage = request.getContextPath() + "/myshop/admin/main.jsp";
 		}
@@ -25,6 +27,7 @@ main.jsp -> loginProc.jsp<br>
 		
 		//존재하면 세션설정을 함
 		session.setAttribute("sid", _id); // sid = admin , sid = hong ... 
+		session.setAttribute("sno", no); 
 		
 	} else{ //존재하지 않음
 		viewPage = "main.jsp";

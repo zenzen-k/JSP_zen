@@ -1,0 +1,33 @@
+select name, id from members;
+
+select pname from product;
+
+select qty, amount from orders;
+
+
+select name, id, pnum from members, orders where no=memno;
+
+
+방법1)
+select * from ( 
+select name, id, pname, qty, amount 
+from (select name, id, pnum, qty, amount from members, orders where no=memno) 
+natural join product) where id='hong';
+
+방법2)
+select * from ( 
+select name, id, pname, qty, amount 
+from (select name, id, pnum, qty, amount from members, orders where no=memno) m 
+inner join product p 
+on m.pnum=p.pnum) where id='hong';
+
+방법3)
+select name, id, pname, qty, amount 
+from (select name, id, pnum, qty, amount from members, orders where no=memno and id='hong') 
+natural join product;
+
+방법4)
+select m.name as mname, m.id mid, p.pname, o.qty, o.amount
+from ( members m inner join orders o on m.no = o.memno) inner join product p
+on o.pnum = p.pnum 
+where id = 'hong';

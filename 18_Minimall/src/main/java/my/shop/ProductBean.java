@@ -13,6 +13,8 @@ public class ProductBean {
 	private int point;
 	private String pinputdate;
 	
+	// 합계금액이 자주쓰이면 이런식으로 하나 만들어 쥬는게 좋음. 
+	private int totalPrice;
 	
 	public int getPnum() {
 		return pnum;

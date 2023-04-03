@@ -47,9 +47,10 @@
 					<b><%=pb.getPname()%></b>
 				</td>
 				<td align="center">
-					<form name="f"method="post">
-						<input type="text" name="oqty" value="<%=pb.getPqty()%>" size="2"> 개 
-						<input type="button" value="수정">
+					<form name="f" method="post" action="mall_cartEdit.jsp">
+						<input type="text" name="oqty" value="<%=pb.getPqty()%>" size="2"> 개
+						<input type="hidden" name="pnum" value="<%=pb.getPnum()%>"> 
+						<input type="submit" value="수정">
 					</form>
 				</td>
 				<td align="right">
@@ -60,7 +61,9 @@
 					<font color="red"><b><%=df.format(pb.getPrice() * pb.getPqty())%> 원</b></font><br>
 					<font color="red"><b>[<%=df.format(pb.getPoint() * pb.getPqty())%>] point</b></font>
 				</td>
-				<td align="center"><a href="">삭제</a></td>
+				<td align="center">
+					<a href="mall_cartDel.jsp?pnum=<%=pb.getPnum()%>">삭제</a>
+				</td>
 			</tr>
 		<%
 		}
@@ -73,8 +76,8 @@
 				<font color="green">총 적립 포인트 : [<%=df.format(sumPoint)%>] point</font>
 			</td>
 			<td colspan="2" align="center">
-				<a href="">[주문하기]</a>
-				<a href="">[계속 쇼핑]</a>
+				<a href="mall_order.jsp?pnum=00&oqty=00">[주문하기]</a>
+				<a href="javascript:history.go(-2)">[계속 쇼핑]</a>
 			</td>
 		</tr>
 		

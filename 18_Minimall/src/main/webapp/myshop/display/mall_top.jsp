@@ -52,9 +52,9 @@
 				<%
 				}
 				%>
-				<a href="mall.jsp">쇼핑몰홈</a> | 
-				<a href="mall_cartList.jsp">장바구니</a> | 
-				<a href="">게시판</a> | 
+				<a href="<%=conPath%>/myshop/display/mall.jsp">쇼핑몰홈</a> | 
+				<a href="<%=conPath%>/myshop/display/mall_cartList.jsp">장바구니</a> | 
+				<a href="<%=conPath%>/myshop/board/select.jsp">게시판</a> | 
 				<a href="">회사소개</a>
 			</div>
 			

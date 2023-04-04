@@ -5,6 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="color.jsp" %>
+
+<%@ include file="../display/mall_top.jsp"%>
 <!-- 외부의 css파일을 가져올 때 link 태그 -->
 <link rel="stylesheet" type="text/css" href="./style.css">
 <style>
@@ -13,9 +15,10 @@
 	}
 	table{
 		margin: auto;
-		width: 700px;
+		/* width: 700px; */
 	}
 </style>
+
 
 <%
 	int pageSize = 5; // 한 페이지에 5개 글이 보이도록 설정
@@ -54,7 +57,7 @@
 
 
 <b>글목록(전체 글:<%=count%>)</b>
-<table>
+<table width="100%">
 	<tr>
 		<td align="right" bgcolor="<%=value_c%>">
 			<a href="writeForm.jsp">글쓰기</a>
@@ -63,7 +66,7 @@
 </table>
 
 <%if(count == 0){%>
-	<table>
+	<table width="100%">
 		<tr>
 			<td align="center" bgcolor="<%=value_c%>">
 				게시판에 저장된 글이 없습니다.
@@ -72,7 +75,7 @@
 	</table>
 
 <%}else{%>
-	<table>
+	<table width="100%">
 		<tr height="30" bgcolor="<%=title_c%>">
 			<th>번 호</th>
 			<th>제 목</th>
@@ -160,4 +163,4 @@
 		}
 	} // if
 %>
-
+<%@ include file="../display/mall_bottom.jsp"%>
